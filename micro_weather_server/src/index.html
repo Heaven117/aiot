@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Demo</title>
+    <script>
+        var ws = new WebSocket('ws://172.20.10.9:8080');
+        ws.onopen = function () {
+            console.log('WebSocket 连接已经建立。');
+        };
+        ws.onmessage = function (event) {
+            console.log('收到websocket服务器消息：', event.data);
+            const data = event.data;
+            document.getElementById("temp").innerHTML = data;
+
+        };
+        ws.onerror = function (event) {
+            console.error('WebSocket 连接出现错误：', event);
+        };
+        ws.onclose = function () {
+            console.log('WebSocket 连接已经关闭。');
+        };
+    </script>
+</head>
+<body>
+<h1>Micro Waeather Station</h1>
+<div style="display: flex;column-gap: 20px; align-items: center ">
+    <h2 style="width: 200px;">now:</h2>
+    <div id="now"></div>
+</div>
+<div style="display: flex;column-gap: 20px; align-items: center ">
+    <h2 style="width: 200px">prediction:</h2>
+    <div id="prediction"></div>
+</div>
+</body>
+</html>
